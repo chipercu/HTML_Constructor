@@ -6,7 +6,7 @@ public class Table {
     private int row;
     private int col;
 
-    private static final String START_COL = "<table";
+    private static final String START_COL = "\n<table";
     private static final String END_TABLE = "</table>\n";
     private static final String CLOSE_PARAM = ">\n";
 
@@ -84,5 +84,10 @@ public class Table {
 
     public void setCol(int col) {
         this.col = col;
+    }
+
+    @Override
+    public String toString() {
+        return printTable();
     }
 }

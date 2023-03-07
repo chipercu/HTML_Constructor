@@ -14,6 +14,11 @@ public class Main {
                     col.setContent(new Img(src).getImgHTML());
                 } else if (i == 1) {
                     col.setContent(new Button("PRESS_ME", "bypass").getButtonHTML());
+                } else if (i == 2) {
+                    Table table1 = new Table(1, 2);
+                    table1.getRowById(0).getColByID(0).setContent("true");
+                    table1.getRowById(0).getColByID(1).setContent("false");
+                    col.setContent(table1.toString());
                 } else {
                     col.setContent(i + "");
                 }
