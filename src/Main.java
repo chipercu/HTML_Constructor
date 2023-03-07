@@ -12,7 +12,9 @@ public class Main {
                 Col col = r.getColByID(i);
                 if (i == 0){
                     col.setContent(new Img(src).getImgHTML());
-                }else {
+                } else if (i == 1) {
+                    col.setContent(new Button("PRESS_ME", "bypass").getButtonHTML());
+                } else {
                     col.setContent(i + "");
                 }
             }
