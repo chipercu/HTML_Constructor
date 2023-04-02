@@ -1,39 +1,85 @@
-public class Main {
+
+
+import tags.Button;
+import tags.parameters.Parameters;
+import tags.Table;
+
+import java.io.*;
+
+import static tags.parameters.Position.*;
+
+
+public class Main implements Parameters {
 
     public static void main(String[] args) {
 
-        Table table = new Table(18, 17);
+        new Main().print();
 
-        table.addParam(" border=1 align=top");
-        String src = "https://img.imgsmail.ru/static.promo/logo/logo_white.svg";
+    }
 
-        for (Row r: table.getRows()){
-            for (int i = 0; i < r.getCols().size(); i++) {
-                Col col = r.getColByID(i);
-                if (i == 0){
-                    col.setContent(new Img(src).getImgHTML());
-                } else if (i == 1) {
-                    col.setContent(new Button("PRESS_ME", "bypass").getButtonHTML());
-                } else if (i == 2) {
-                    Table table1 = new Table(1, 2);
-                    table1.getRowById(0).getColByID(0).setContent("true");
-                    table1.getRowById(0).getColByID(1).setContent("false");
-                    col.setContent(table1.toString());
-                } else {
-                    col.setContent(i + "");
-                }
+
+    public void print(){
+
+        Table t2 = new Table(2, 20);
+        t2.setParams(height(32), width(t2.getCols() * 9 + 20), border(1), " style=\"border-spacing:0\"");
+        t2.row(0).setHeight(32);
+        t2.row(1).setHeight(32);
+        final Button button = new Button("Test", "_action", 8, 32, "qwer.img", "wqer1");
+//        t2.row(1).getColumns().forEach(e -> e.insert(button.setValue("1").build()));
+
+        for (int i = 0; i < t2.row(0).getColumns().size(); i++) {
+            if (i%2 == 0){
+                button.setValue("BUTTON" + (i + 1));
+                t2.row(1).col(i).insert(button.build());
             }
 
         }
+        int lvl = 6;
+        for (int i = 0; i < 19; i += 2 ) {
+            if (i < lvl * 2){
+                if (i == 0){
+                    t2.row(0).col(i).setParams(" style=\"background-color: red;\"");
+                    t2.row(0).col(i + 1).setParams(width(1), " style=\"background-color: black;\"");
+                }
+                t2.row(0).col(i).setParams( " style=\"background-color: red;\"");
+                t2.row(0).col(i + 1).setParams(width(1) , " style=\"background-color: black;\"");
+            }else {
+                t2.row(0).col(i).setParams(" style=\"background-color: green;\"");
+                t2.row(0).col(i + 1).setParams(width(1), " style=\"background-color: black;\"");
+            }
+        }
 
-//
-//        table.getRowById(1).getColByID(1).setContent("ASDASDASDASD").addParam(" height=10");
-//        Img img = new Img(src, 64, 64);
-//        table.getRowById(1).getColByID(0).setContent(img.toString());
+//        System.out.println(t2.build());
 
-        String s = table.printTable();
-        System.out.println(s);
+        StringBuilder html = new StringBuilder();
 
+        try {
+            Reader  reader = new FileReader("index.html");
+            BufferedReader buffReader = new BufferedReader(reader);
+            while (buffReader.ready()) {
+                html.append(buffReader.readLine());
+            }
+            reader.close();
+            buffReader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
+        final String replace = html.toString().replace("%content%", t2.build());
+
+        FileWriter file;
+        try {
+            file = new FileWriter("index2.html");
+            file.write(replace);
+            file.flush();
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String build() {
+        return null;
     }
 }

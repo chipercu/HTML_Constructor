@@ -1,4 +1,6 @@
-public class Img {
+package tags;
+
+public class Img implements Build{
 
     private String src = "icon.NOICON";
     private int width = 32;
@@ -10,12 +12,12 @@ public class Img {
         initImg();
     }
 
-    public Img(String src){
+    public Img(String src, String ...params){
         this.src = src;
         initImg();
     }
 
-    public Img(String src, int width, int height){
+    public Img(String src, int width, int height, String ...params){
         this.src = src;
         this.width = width;
         this.height = height;
@@ -77,5 +79,10 @@ public class Img {
     @Override
     public String toString() {
         return imgHTML;
+    }
+
+    @Override
+    public String build() {
+        return null;
     }
 }

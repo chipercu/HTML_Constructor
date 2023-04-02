@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Table {
+public class Table{
 
     private int row;
     private int col;
@@ -14,9 +14,14 @@ public class Table {
 
     private List<Row> rows = new ArrayList<>();
 
-    public Table(int row, int col) {
+    public Table(int row, int col, String ...params) {
         this.row = row;
         this.col = col;
+        if (params.length > 0){
+            for (String p: params){
+                getParams().add(p);
+            }
+        }
         initTable();
     }
 
@@ -45,8 +50,10 @@ public class Table {
         return stringBuilder.toString();
     }
 
-    public Table addParam(String param){
-        getParams().add(param);
+    public Table addParam(String ...param){
+        for (String p: param){
+            getParams().add(p);
+        }
         return this;
     }
 
