@@ -1,6 +1,6 @@
 package tags.parameters;
 
-public interface Parameters {
+public interface Parameters extends ButtonAction{
 
 
     String build();
@@ -24,7 +24,6 @@ public interface Parameters {
     default String BORDER(int value) {
         return " border=" + value;
     }
-
 
     default String align(Position value) {
         return new ParametrValue(" align=\"", value.getValue()).toString();

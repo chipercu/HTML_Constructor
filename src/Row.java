@@ -25,6 +25,9 @@ public class Row {
         }
         return stringBuilder.toString();
     }
+    public Col col(int id){
+        return getColByID(id);
+    }
 
     public int getCol_count() {
         return col_count;

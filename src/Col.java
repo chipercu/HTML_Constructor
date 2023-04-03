@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Col {
+public class Col{
 
 
     private static final String START_COL = "       <td";
@@ -17,8 +17,8 @@ public class Col {
 
 
     public Col(){
-        params.add(COL_WIDTH_DEFAULT);
-        params.add(COL_HEIGHT_DEFAULT);
+//        params.add(COL_WIDTH_DEFAULT);
+//        params.add(COL_HEIGHT_DEFAULT);
     }
     public String text(){
         StringBuilder param = new StringBuilder();
@@ -41,8 +41,10 @@ public class Col {
         return this;
     }
 
-    public Col addParam(String param){
-        getParams().add(param);
+    public Col addParam(String... param){
+        for (String p: param){
+            getParams().add(p);
+        }
         return this;
     }
 
