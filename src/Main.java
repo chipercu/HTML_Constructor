@@ -1,12 +1,8 @@
-
-
 import tags.Button;
 import tags.parameters.Parameters;
 import tags.Table;
 
 import java.io.*;
-
-import static tags.parameters.Position.*;
 
 
 public class Main implements Parameters {
@@ -22,11 +18,9 @@ public class Main implements Parameters {
 
         Table t2 = new Table(2, 20);
         t2.setParams(height(32), width(t2.getCols() * 9 + 20), border(1), " style=\"border-spacing:0\"");
-        t2.row(0).setHeight(32);
+        t2.row(0).setHeight(16);
         t2.row(1).setHeight(32);
-        final Button button = new Button("Test", "_action", 8, 32, "qwer.img", "wqer1");
-//        t2.row(1).getColumns().forEach(e -> e.insert(button.setValue("1").build()));
-
+        final Button button = new Button("Test", simpleAction("action"), 8, 32, "qwer.img", "wqer1");
         for (int i = 0; i < t2.row(0).getColumns().size(); i++) {
             if (i%2 == 0){
                 button.setValue("BUTTON" + (i + 1));
@@ -48,9 +42,6 @@ public class Main implements Parameters {
                 t2.row(0).col(i + 1).setParams(width(1), " style=\"background-color: black;\"");
             }
         }
-
-//        System.out.println(t2.build());
-
         StringBuilder html = new StringBuilder();
 
         try {
